@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Test1</title>
+</head>
+<style type="text/css">
+.btndiv{position: relative; overflow: hidden;}
+.imgdiv{position: relative;}
+.imgwrap{position: absolute; width: 300px; height: 630px; display: none; top: 200px; left: 50%; transform: translateX(-50%);}
+#black{background: url(img/black.jpeg) center / cover no-repeat;}
+#blue{background: url(img/blue.jpeg) center / cover no-repeat;}
+#gold{background: url(img/gold.jpeg) center / cover no-repeat;}
+#rose-gold{background: url(img/rose-gold.jpeg) center / cover no-repeat;}
+</style>
+<body>
+<div>
+	<div class="btndiv">
+		<input type="button" value="black" onclick="dispImg(this.value)">
+		<input type="button" value="blue" onclick="dispImg(this.value)">
+		<input type="button" value="gold" onclick="dispImg(this.value)">
+		<input type="button" value="rose-gold" onclick="dispImg(this.value)">
+	</div>
+	<div class="imgdiv">
+		<div class="imgwrap" id="black"></div>
+		<div class="imgwrap" id="blue"></div>
+		<div class="imgwrap" id="gold"></div>
+		<div class="imgwrap" id="rose-gold"></div>
+	</div>
+</div>
+<script type="text/javascript">
+var imgwrap = document.getElementsByClassName("imgwrap");
+function dispImg(val){
+	try{
+		var imgClassName = document.getElementById(val);
+		if(val == "black"){
+			for(var i=0; i<imgwrap.length; i++)
+				imgwrap[i].style.display = "none";
+			imgClassName.style.display = "block";
+		}
+		else if(val == "blue"){
+			for(var i=0; i<imgwrap.length; i++)
+				imgwrap[i].style.display = "none";
+			imgClassName.style.display = "block";
+		}
+		else if(val == "gold"){
+			for(var i=0; i<imgwrap.length; i++)
+				imgwrap[i].style.display = "none";
+			imgClassName.style.display = "block";
+		}
+		else if(val == "rose-gold"){
+			for(var i=0; i<imgwrap.length; i++)
+				imgwrap[i].style.display = "none";
+			imgClassName.style.display = "block";
+		}
+	}catch(e){
+		console.log('error in dispImg '+e);
+	}
+}
+</script>
+</body>
+</html>
