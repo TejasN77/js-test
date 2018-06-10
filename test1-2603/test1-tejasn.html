@@ -4,58 +4,97 @@
 <title>Test1</title>
 </head>
 <style type="text/css">
-.btndiv{position: relative; overflow: hidden;}
-.imgdiv{position: relative;}
-.imgwrap{position: absolute; width: 300px; height: 630px; display: none; top: 200px; left: 50%; transform: translateX(-50%);}
-#black{background: url(img/black.jpeg) center / cover no-repeat;}
-#blue{background: url(img/blue.jpeg) center / cover no-repeat;}
-#gold{background: url(img/gold.jpeg) center / cover no-repeat;}
-#rose-gold{background: url(img/rose-gold.jpeg) center / cover no-repeat;}
+.inner{position: relative; overflow: hidden; margin-top: 30px;}
+.inner1{margin-top: 0;}
+.ques{font-size: 16px; font-weight: bold;}
+.answrap{visibility: hidden; font-size: 14px; color: #008000; margin-bottom: 10px;}
+.ans{color: #0000ff; text-decoration: underline; margin-right: 7px;}
+#ans7{display: inline;}
+.reveal{position: relative; overflow: hidden; display: inline-block; padding: 5px; background: #ccc; color: #000; text-decoration: none; cursor: pointer;}
 </style>
 <body>
-<div>
-	<div class="btndiv">
-		<input type="button" value="black" onclick="dispImg(this.value)">
-		<input type="button" value="blue" onclick="dispImg(this.value)">
-		<input type="button" value="gold" onclick="dispImg(this.value)">
-		<input type="button" value="rose-gold" onclick="dispImg(this.value)">
+<div class="after-wrap">
+
+	<div class="inner inner1">
+		<p class="ques">Create a variable called carName, assign the value "Honda City" to it, and display it.</p>
+		<div class="answrap" id="answrap1">carName = <span class="ans" id="ans1"></span></div>
+		<a class="reveal" id="reveal1">Ans</a>
 	</div>
-	<div class="imgdiv">
-		<div class="imgwrap" id="black"></div>
-		<div class="imgwrap" id="blue"></div>
-		<div class="imgwrap" id="gold"></div>
-		<div class="imgwrap" id="rose-gold"></div>
+	<div class="inner">
+		<p class="ques">Create a variable called number, assign the value 150 to it, and display it.</p>
+		<div class="answrap" id="answrap2">number = <span class="ans" id="ans2"></span></div>
+		<a class="reveal" id="reveal2">Ans</a>
+	</div>
+	<div class="inner">
+		<p class="ques">Display the sum of 5 + 10, using two variables x and y.</p>
+		<div class="answrap" id="answrap3">x + y = <span class="ans" id="ans3"></span></div>
+		<a class="reveal" id="reveal3">Ans</a>
+	</div>
+	<div class="inner">
+		<p class="ques">Create a third variable called z, assign x + y to it, and display it</div>
+		<div class="answrap" id="answrap4">z = <span class="ans" id="ans4"></span></div>
+		<a class="reveal" id="reveal4">Ans</a>
+	</div>
+	<div class="inner">
+		<p class="ques">Use a single var keyword to create three variables with the following values: firstName = “John” lastName = “Doe" age = 35</p>
+		<div class="answrap" id="answrap5">firstName = <span class="ans" id="ans5-1"></span> lastName = <span class="ans" id="ans5-2"></span> age = <span class="ans" id="ans5-3"></span></div>
+		<a class="reveal" id="reveal5">Ans</a>
+	</div>
+	<div class="inner">
+		<p class="ques">Create DOB constant. Assume calculateAge() function will give you age. Store the value of calculateAge() in your variable/constant.</p>
+		<div class="answrap" id="answrap6">DOB is 11/01/1993 and your age is = <span class="ans" id="ans6"></span></div>
+		<a class="reveal" id="reveal6">Ans</a>
+	</div>
+	<div class="inner">
+		<p class="ques">Create a variable, assign some value to your variable and insert the value inside "div" element.</p>
+		<div class="answrap" id="answrap7">value assigned to the variable is <div class="ans" id="ans7"></div></div>
+		<a class="reveal" id="reveal7">Ans</a>
 	</div>
 </div>
 <script type="text/javascript">
-var imgwrap = document.getElementsByClassName("imgwrap");
-function dispImg(val){
-	try{
-		var imgClassName = document.getElementById(val);
-		if(val == "black"){
-			for(var i=0; i<imgwrap.length; i++)
-				imgwrap[i].style.display = "none";
-			imgClassName.style.display = "block";
-		}
-		else if(val == "blue"){
-			for(var i=0; i<imgwrap.length; i++)
-				imgwrap[i].style.display = "none";
-			imgClassName.style.display = "block";
-		}
-		else if(val == "gold"){
-			for(var i=0; i<imgwrap.length; i++)
-				imgwrap[i].style.display = "none";
-			imgClassName.style.display = "block";
-		}
-		else if(val == "rose-gold"){
-			for(var i=0; i<imgwrap.length; i++)
-				imgwrap[i].style.display = "none";
-			imgClassName.style.display = "block";
-		}
-	}catch(e){
-		console.log('error in dispImg '+e);
-	}
+var carName = "Honda City";
+var number = 150;
+var x = 5;
+var y = 10;
+var z = x+y;
+var firstName = "John", lastName = "Doe", age = 35;
+const DOB = 11011993;
+var myVar;
+myVar = "foo";
+document.getElementById("reveal1").addEventListener("click", function(){
+    document.getElementById("ans1").innerHTML = carName;
+    document.getElementById("answrap1").style.visibility = "visible";
+});
+document.getElementById("reveal2").addEventListener("click", function(){
+    document.getElementById("ans2").innerHTML = number;
+    document.getElementById("answrap2").style.visibility = "visible";
+});
+document.getElementById("reveal3").addEventListener("click", function(){
+    document.getElementById("ans3").innerHTML = x+y;
+    document.getElementById("answrap3").style.visibility = "visible";
+});
+document.getElementById("reveal4").addEventListener("click", function(){
+    document.getElementById("ans4").innerHTML = z;
+    document.getElementById("answrap4").style.visibility = "visible";
+});
+document.getElementById("reveal5").addEventListener("click", function(){
+    document.getElementById("ans5-1").innerHTML = firstName;
+    document.getElementById("ans5-2").innerHTML = lastName;
+    document.getElementById("ans5-3").innerHTML = age;
+    document.getElementById("answrap5").style.visibility = "visible";
+});
+document.getElementById("reveal6").addEventListener("click", function(){
+    document.getElementById("ans6").innerHTML = calculateAge();
+    document.getElementById("answrap6").style.visibility = "visible";
+});
+document.getElementById("reveal7").addEventListener("click", function(){
+    document.getElementById("ans7").innerHTML = myVar;
+    document.getElementById("answrap7").style.visibility = "visible";
+});
+function calculateAge(){
+    return 27;
 }
+
 </script>
 </body>
 </html>
