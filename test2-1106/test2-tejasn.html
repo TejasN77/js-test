@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Test2</title>
+</head>
+<style type="text/css">
+html{height: 100%;}
+body{min-height: 100%;}
+.inner{position: relative; overflow: hidden; margin-top: 30px; background: #fff;}
+.inner1{margin-top: 0;}
+.ques{font-size: 16px; font-weight: bold;}
+.answrap{font-size: 14px; color: #008000; margin-bottom: 10px;}
+.ans{color: #0000ff; text-decoration: underline; margin-right: 7px;}
+#ans7{display: inline;}
+.reveal{position: relative; overflow: hidden; display: inline-block; padding: 5px; background: #ccc; color: #000; text-decoration: none; cursor: pointer;}
+</style>
+<body>
+<div class="after-wrap">
+
+	<div class="inner inner1">
+		<p class="ques">1.</p>
+		<div class="answrap" id="answrap1">counter++ will alert 0, because of post increament. ++counter will alert 1, because of pre increament</div>
+	</div>
+	<div class="inner">
+		<p class="ques">2.</p>
+		<div class="answrap" id="answrap1">var n= 2 n *=3+5; alert(n); will alert 16.</div>
+	</div>
+	<div class="inner">
+		<p class="ques">3.</p>
+		<div class="answrap" id="answrap1">a = 2; b = 2; c = 2; d = 1;</div>
+	</div>
+	<div class="inner">
+		<p class="ques">4.</p>
+		<div class="answrap" id="answrap1">a = 4; x = 5;</div>
+	</div>
+	<div class="inner">
+		<p class="ques">5.</p>
+		<div class="answrap" id="answrap1">Check console plz</div>
+	</div>
+	<div class="inner">
+		<p class="ques">6.</p>
+		<div class="answrap" id="answrap1">Check console plz</div>
+	</div>
+	<div class="inner">
+		<p class="ques">7.</p>
+		<div class="answrap" id="answrap1"> var a = +prompt('a?', '');<br>
+									        switch (a) {<br>
+									        case 0:<br>
+									        a = "0";<br>
+									        break;<br>
+									        case 1:<br>
+									        a = "1";<br>
+									        break;<br>
+									        case 2:<br>
+									        case 3:<br>
+									        a = "2,3";<br>
+									        break;<br>
+									        default:<br>
+									        a = "Unknown number";<br>
+									      }<br>
+		</div>
+	</div>
+	<div class="inner">
+		<p class="ques">8.</p>
+		<div class="answrap" id="answrap1">Check console plz (age = 15)</div>
+	</div>
+	<div class="inner">
+		<p class="ques">9.</p>
+		<div class="answrap" id="answrap1"></div>
+	</div>
+</div>
+</div>
+<script type="text/javascript">
+function setBg() {
+	var hrs = new Date().getHours()
+    if(hrs > 0 && hrs <= 12) document.body.style.background = "yellow url('img/morning.jpg') center / cover no-repeat";
+    else if(hrs > 12 && hrs <= 16) document.body.style.background = "blue url('img/eve.jpg') center / cover no-repeat";
+    else document.body.style.background = "black url('img/night.jpg') center / cover no-repeat";
+}
+function great(){
+		var numb = [1, 2, 3, 4];
+		var greatest = 0;
+		for (i=0; i<=greatest;i++){		
+		if (numb[i]>greatest) {
+			var greatest=numb[i];
+		}
+	}
+	console.log("5.Greatest number is " + greatest);
+}
+function tern(){
+	a = 1;
+	b = 2;
+		a+b<4 ? result = 'Below' : result = 'Over';
+	console.log("6. "+result);
+}
+function checkAge() {
+	var age = 15;
+	if (age > 0 && age < 13) {
+		console.log("8. young");
+	}else if (age > 13 && age < 30){
+	  console.log("8. teenager");
+	}else{
+	  console.log("8. old");
+	}
+}
+function checkDay() {
+	var day;
+	switch (new Date().getDay()) {
+	case 1:
+	day = "Monday";
+	break;
+	case 2:
+	day = "Tuesday";
+	break;
+	case 3:
+	day = "Wednesday";
+	break;
+	case 4:
+	day = "Thursday";
+	break;
+	case 5:
+	day = "Friday";
+	break;
+	case 0:
+	case 6:
+	day = "Weekend";
+	break;
+	default:
+	day = "Unknown Day";
+	}
+	console.log("9. Today is " + day);
+}
+window.onload=function(){
+	setBg();
+	great();
+	tern();
+	checkAge();
+	checkDay();
+};
+</script>
+</body>
+</html>
