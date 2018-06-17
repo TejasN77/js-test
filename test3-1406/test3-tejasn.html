@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Test1</title>
+</head>
+<style type="text/css">
+.hdr{position: relative; overflow: hidden; height: 40px; line-height: 40px; text-align: center; font-size: 25px; color: #000; width: 98.9%; background: #fff; border-bottom: solid 2px #000; margin-top: 200px;}
+.inner{position: relative; overflow: hidden; margin-top: 30px;}
+.inner1{margin-top: 0;}
+.myfrm{margin: 15px 0;}
+.rslt span{color: blue;}
+</style>
+<body onscroll="stickyHeader();">
+<div class="after-wrap" id="after-wrap">
+	<h1 class="hdr" id="hdr">This header will be sticky</h1>
+	<div class="inner inner1">1. Both the functions are same. As control is taken outside after executing return</div>
+	<div class="inner">
+		<p>2.</p>
+		function checkAge(age){<br>
+			return(age>18 ? true : 'Did parents allow you?');<br>
+		}
+		<form class="chck-age-frm myfrm">	
+			<input type="number" required="true" placeholder="Enter your age" id="age-ip">
+			<input type="button" id="check-age-btn" value="Check Age">
+		</form>
+		<p id="rslt1" class="rslt"></p>
+	</div>
+	<div class="inner">
+		<p>3.</p>
+		function checkNum(a,b){<br>
+			return(a < b ? a : b);<br>
+		}
+		<form class="chck-age-frm myfrm">	
+			<input type="number" required="true" placeholder="Enter number1" id="num1">
+			<input type="number" required="true" placeholder="Enter number2" id="num2">
+			<input type="button" id="check-sml-num" value="Check Smallest Number">
+		</form>
+		<p id="rslt2" class="rslt"></p>
+	</div>
+	<div class="inner">
+		<p>4.</p>
+		for (var counter = 1; counter <= 100; counter++) {<br>
+		    var notPrime = false;<br>
+		    for (var i = 2; i <= counter; i++) {<br>
+		        if (counter%i===0 && i!==counter) {<br>
+		            notPrime = true;<br>
+		        }<br>
+		    }<br>
+		    if (notPrime === false) {<br>
+		        console.log(counter);<br>
+		    }<br>
+		}<br>
+		<input type="button" id="find-prime" value="Find prime numbers from 1 to 100">
+		<p id="rslt3" class="rslt"></p>
+	</div>
+	<div class="inner">
+		<p>5.</p>
+		(function(){<br>
+			console.log("This innerHTML is changed by an IIFE");<br>
+		})();
+		<p id="rslt4" class="rslt"></p>
+	</div>
+	<div class="inner">
+		<p>6.</p>
+		Function name can be omitted in function expression.
+	</div>
+	<div class="inner">
+		<p>9.</p>
+		function palindrome(str){<br>
+			var re = /[\W_]/g;<br>
+			var lowRegStr = str.toLowerCase().replace(re, '');<br>
+			var reverseStr = lowRegStr.split('').reverse().join('');<br>
+			return reverseStr === lowRegStr;<br>
+		}
+		<form class="check-palm myfrm">
+			<input type="text" required="true" placeholder="enter a string" id="palm">
+			<input type="button" id="check-palm-btn" value="Check if Palindrom or not">
+		</form>
+		<p id="rslt9" class="rslt"></p>
+	</div>
+	<div class="inner">
+		<p>10.</p>
+		function generateFib(num){<br>
+			var fib = []; // Initialize array!<br>
+		    fib[0] = 0;<br>
+		    fib[1] = 1;<br>
+		    for(i=2; i<=10; i++)<br>
+		    {<br>
+		        // Next fibonacci number = previous + one before previous<br>
+		        fib[i] = fib[i-2] + fib[i-1];<br>
+		        console.log(fib[i]);<br>
+		    }<br>
+		}<br>
+		<form class="check-fib myfrm">
+			<input type="number" required="true" placeholder="enter a number" id="fib">
+			<input type="button" id="check-fib-btn" value="Find Fibonacci Series">
+		</form>
+		<p id="rslt10" class="rslt"></p>
+	</div>
+</div>
+<script type="text/javascript">
+window.onload=function(){
+	function checkAge(age){
+		return(age>18 ? true : 'Did parents allow you?');
+	}
+	function checkNum(a,b){
+		return(a<b ? a : b);
+	}
+	function checkPrime(){
+		for (var counter = 1; counter <= 100; counter++) {
+		    var notPrime = false;
+		    for (var i = 2; i <= counter; i++) {
+		        if (counter%i===0 && i!==counter) {
+		            notPrime = true;
+		        }
+		    }
+		    if (notPrime === false) {
+		    	var currInner = document.getElementById("rslt3").innerHTML;
+		        document.getElementById("rslt3").innerHTML = currInner + "&nbsp" + counter;
+		    }
+		}
+	}
+	function palindrome(str){
+		var re = /[\W_]/g;
+		var lowRegStr = str.toLowerCase().replace(re, '');
+		var reverseStr = lowRegStr.split('').reverse().join('');
+		if (reverseStr === lowRegStr) document.getElementById("rslt9").innerHTML = "Given string is a Palimdrome";
+		else document.getElementById("rslt9").innerHTML = "Given string is not a Palimdrome";
+	}
+	function generateFib(num){
+		var fib = [];
+	    fib[0] = 0;
+	    fib[1] = 1;
+	    for(i=2; i<=num; i++)
+	    {
+	        fib[i] = fib[i-2] + fib[i-1];
+	        var currInner = document.getElementById("rslt10").innerHTML;
+		    document.getElementById("rslt10").innerHTML = currInner + "&nbsp" + fib[i];
+	        console.log(fib[i]);
+	    }
+	}
+	(function(){
+		document.getElementById("rslt4").innerHTML = "This innerHTML is changed by an IIFE";
+		console.log("This innerHTML is changed by an IIFE");
+	})();
+	document.getElementById("check-age-btn").addEventListener("click", function(){
+		document.getElementById("rslt1").innerHTML = "Result is <span>" + (checkAge(document.getElementById("age-ip").value)) + "</span>";
+	});
+	document.getElementById("check-sml-num").addEventListener("click", function(){
+		document.getElementById("rslt2").innerHTML = "Smallest number is <span>" + (checkNum(document.getElementById("num1").value , document.getElementById("num2").value)) + "</span>";
+	});
+	document.getElementById("find-prime").addEventListener("click", function(){
+		checkPrime();
+	});
+	document.getElementById("check-palm-btn").addEventListener("click", function(){
+		palindrome(document.getElementById("palm").value);
+	});
+	document.getElementById("check-fib-btn").addEventListener("click", function(){
+		generateFib(document.getElementById("fib").value);
+	});
+}
+function stickyHeader(){
+	console.log("stickyHeader called");
+	if(document.documentElement.scrollTop >= 200){
+		document.getElementById("hdr").style.position = "fixed";
+		document.getElementById("hdr").style.marginTop = "0";
+	}
+	else{
+		document.getElementById("hdr").style.position = "relative";
+		document.getElementById("hdr").style.marginTop = "200px";
+	}
+}
+</script>
+</body>
