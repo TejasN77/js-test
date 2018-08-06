@@ -1,0 +1,255 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<style type="text/css">
+    /*CSS RESET STARTS*/
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin: 0;padding: 0;border: 0;font-size: 100%;font: inherit;vertical-align: baseline;}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display: block;}
+body {line-height: 1;margin:0;}
+ol, ul {list-style: none;}
+blockquote, q {quotes: none;}
+blockquote:before, blockquote:after,q:before, q:after {content: '';content: none;}
+table {border-collapse: collapse;border-spacing: 0;}
+/*CSS RESET ENDS*/
+
+body{background: url('images/back2.jpg') bottom center no-repeat; background-attachment: fixed; background-size: cover; font-family: 'Open Sans', sans-serif; font-weight: 400;}
+.wrapper{width: 100%; height: 100%; position: relative; overflow: auto; visibility: hidden;}
+.tophead{height: 53px; width: 100%; background: url('images/headerback.png') repeat;}
+.tophead .logo{width: 1380px; height: 53px; margin: 0 auto; background: url('images/logo5.png') left center no-repeat; background-size: 300px 30px;}
+.container{margin: 10px 20px 0;}
+.container div.list{width: 32%; height: auto; margin-right: 2%; float: left; overflow: hidden;}
+.container div.right{margin-right: 0;}
+.container div.list h2{text-align: center; font-size: 20px; height: 24px; font-weight: bold; color: #2d3647;}
+.container ul li{width: auto; height: 76px; position: relative; overflow: hidden; list-style: none; border-radius: 5px; margin-top: 10px; background: rgba(255,255,255,0.95); padding: 10px; padding-left: 100px;}
+.container ul li span.teamColor{position: absolute; padding-left: 10px; padding-top: 25px; height: 93px; width: 70px; color: #fff; font-weight: bold; font-size: 17px; top: 0; left: 0;}
+.container ul li span.teamColor p{display: block; color: #fff; font-size: 17px; text-align: left;}
+.container ul li div.PrioWrap, .container ul li div.AssgWrap{margin: 15px 0; width: 23%; float: left;}
+.container ul li div.AssgWrap{width: 60%;}
+.container ul li div.AssgWrap{margin-left: 10px;}
+.container ul li span.taskTxt{text-decoration: none; display: inline-block; font-size: 17px; line-height: 21px; color: #333; font-weight: 700; overflow: hidden; word-wrap: break-word; height: 21px; margin-left: 23px; width: 90%; text-overflow: ellipsis; white-space: nowrap;}
+.container ul li a.Task{position: absolute; width: 17px; height: 17px; border-radius: 50%; top: 13px; background: url('images/linklogo.png') no-repeat;}
+.container ul li span{display: inline-block; font-size: 16px; height: 20px; line-height: 20px; color: #333; padding: 0 10px 0 0;}
+.container ul li span.persAssgLogo{position: absolute; width: 18px; height: 17px; background: url('images/personassigned.png') no-repeat;}
+.container ul li span.prioTxt{padding-left: 17px;}
+.container ul li span.prioNormal{background: url('images/prionormal.png') left 12px no-repeat;}
+.container ul li span.prioLow{background: url('images/priolow.png') left 12px no-repeat;}
+.container ul li span.prioHigh{background: url('images/priohigh.png') left 12px no-repeat;}
+.container ul li p{font-size: 16px; height: 20px; line-height: 20px; color: #333; text-align: center; display: inline-block; text-transform: capitalize;}
+.container ul li p.Assigned{margin-left: 25px;}
+.container ul li p.task{margin-top: 20px; font-weight: bold; color: #000; font-size: 21px; line-height: 25px;}
+.container ul li p.url{margin-top: 15px; color: #dc2c49; font-size: 18px; padding: 0 10px;}
+.container ul li span.AssignedAt{position: absolute; bottom: 10px; right: 10px; font-size: 14px; color: #666;}
+.tophead #lastUpdate{position: absolute; top: 18px; right: 20px; font-size: 14px; color: #fff;}
+.container ul li a.Task:hover{box-shadow: -1px 1px 5px 2px #bbb; transition: all, 0.5s;}
+#loader{position: absolute; width: 40px; height: 40px; border-radius: 50%; border: solid 8px #43b2ff; border-top-color: #f3f3f3; -webkit-animation: spin 2s linear infinite; animation: spin 2s linear infinite; top: 50%; margin-top: -20px; left: 50%; margin-left: -20px; display: block;}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@media only screen and (max-width: 1700px){
+    .container ul li span.prioTxt{text-indent: -999; padding-left: 15px;}
+}
+</style>
+  <body>
+    <div class="wrapper" id="container">
+        <div class="tophead">
+            <div id="lastUpdate">Last Updated At: </div>
+            <div class="logo"></div>
+        </div>
+        <div class="container">
+            <div class="list left">
+                <h2 id="InQ">In queue:- </h2>
+                <ul class="unassigned" id="unassigned"></ul>
+            </div>
+            <div class="list center">
+                <h2 id="Asgd">Assigned:- </h2>
+                <ul class="assigned" id="assigned"></ul>
+            </div>
+            <div class="list right">
+                <h2 id="Cmplt">Completed:- </h2>
+                <ul class="completed" id="completed"></ul>
+            </div>
+        </div>  
+    </div>
+    <div class="loader" id="loader"></div>
+  </body>
+</html>
+
+<script type="text/javascript">
+(function(){
+var SheetName;
+var colorMapping;
+var sheetNumber = 1;
+var pre_url = "https://spreadsheets.google.com/feeds/list/1uPjIlmqkuFl2wjeKna6fEh8cYL3uJdJC7E6u0T6b6D0/";
+var post_url = "/public/values?alt=json";
+var DataSheet = pre_url + sheetNumber + post_url;
+
+var today = new Date();
+var mm = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"];
+var yyyy = today.getFullYear(); 
+var currName = mm[today.getMonth()]+' '+yyyy;
+
+  try{
+    getSheetName(DataSheet);
+    function checkDate(SheetNameCurr){
+        if(SheetNameCurr==currName){
+            printData();
+          }
+        else{ 
+            sheetNumber++;
+            DataSheet = pre_url + sheetNumber + post_url;
+            getSheetName(DataSheet);   
+        }
+    };
+      
+    function getSheetName(url){
+        $.getJSON(url, function( data ) {
+        SheetName = data['feed']['title']['$t'];
+        checkDate(SheetName);
+        });
+    }
+    
+    function printData(){
+        $.getJSON( DataSheet, function( data ) {
+        var dataSheet = data['feed']['entry'];
+      var totalInQ = 0;
+      var totalAsgd = 0;
+      var totalCmplt = 0;
+      for(var i=0; i<dataSheet.length; i++){
+            dataJson = dataSheet[i];
+            var newinner1 = (dataJson['gsx$developer1']['$t']).toLowerCase();
+            var newinner2 = (dataJson['gsx$developer2']['$t']).toLowerCase();
+            var newinner3 = (dataJson['gsx$developer3']['$t']).toLowerCase();
+            var Status = (dataJson['gsx$status']['$t']).toLowerCase();
+            if((newinner1==""&&newinner2==""&&newinner3=="")&&(Status=="pending")){
+                $('#unassigned').append("<li id='newTask"+[i]+"'></li>");
+                var url = (dataJson['gsx$basecamplink']['$t']);
+                listId = $('#newTask'+i);
+                feedData(url, listId, dataJson);
+                var team = (dataJson['gsx$team']['$t']).toLowerCase();
+                listName = $('#newTask'+i);
+                colorCode(listName, team);
+                totalInQ++;    
+
+            }else if((newinner1!=""||newinner2!=""||newinner3!="")&&(Status=="open")){
+                $('#assigned').append("<li id='assignedTask"+[i]+"'></li>");
+                var url = (dataJson['gsx$basecamplink']['$t']);
+                listId = $('#assignedTask'+i);
+                feedData(url, listId, dataJson);
+                var timeAssigned = (dataJson['gsx$timeassigned']['$t']);
+                addTimeStamp(timeAssigned, listId);
+                var team = (dataJson['gsx$team']['$t']).toLowerCase();
+                listName = $('#assignedTask'+i);
+                colorCode(listName, team);
+                $('#assignedTask'+i).append("<div class='AssgWrap'><span class='persAssgLogo'></span><p class='Assigned'>"+newinner1+"</p></div>");
+                if(newinner2!="") $('#assignedTask'+i+' .Assigned').html($('#assignedTask'+i+' .Assigned').html()+", "+newinner2);
+                if(newinner3!="") $('#assignedTask'+i+' .Assigned').html($('#assignedTask'+i+' .Assigned').html()+", "+newinner3);
+                totalAsgd++;
+
+
+            }else{
+                $('#completed').append("<li id='completedTask"+[i]+"'></li>");
+                var url = (dataJson['gsx$basecamplink']['$t']);
+                listId = $('#completedTask'+i);
+                feedDataCompleted(url, listId, dataJson);
+                var team = (dataJson['gsx$team']['$t']).toLowerCase();
+                listName = $('#completedTask'+i);
+                colorCode(listName, team);
+                $('#assignedTask'+i).append("<div class='AssgWrap'><span class='persAssgLogo'></span><p class='Assigned'>"+newinner1+"</p></div>");
+                if(newinner2!="") $('#assignedTask'+i+' .Assigned').html($('#assignedTask'+i+' .Assigned').html()+", "+newinner2);
+                if(newinner3!="") $('#assignedTask'+i+' .Assigned').html($('#assignedTask'+i+' .Assigned').html()+", "+newinner3);
+                totalCmplt++;
+            }
+            
+      }
+
+      function colorCode(liName, group){
+              colorMapping={
+                sunil :{
+                  bgsort : "f99534",
+                  dispName : "Sunil"
+                },
+                vishal :{
+                  bgsort : "8ec941",
+                  dispName : "vishal"
+                },
+                bodhi :{
+                  bgsort : "6e40ba",
+                  dispName : "bodhi"
+                },
+                ss :{
+                  bgsort : "2ad38a",
+                  dispName : "ss"
+                },
+                chirag :{
+                  bgsort : "4362ff",
+                  dispName : "chirag"
+                },
+                pradeep :{
+                  bgsort : "43b2ff",
+                  dispName : "pradeep"
+                },
+                sanket :{
+                  bgsort : "43b2ff",
+                  dispName : "sanket"
+                },
+              };
+              if(colorMapping.hasOwnProperty(group)){  
+                liName.append("<span class='teamColor' style='background-color:#"+colorMapping[group].bgsort+";'><p>By</p><p>"+colorMapping[group].dispName+"</p></span>");
+              }
+              else{
+                liName.append("<span class='teamColor' style='background-color:#ccc;'><p>By</p><p>General</p></span>");
+              }
+            }
+
+      function feedData(liID, taskLink, dataSet){
+                taskLink.append("<a class='Task' href="+liID+" target='_blank'></a><span class='taskTxt'>"+(dataSet['gsx$task']['$t'])+"</span>");
+                taskLink.append("<div class='PrioWrap'><span class='prioTxt' data-num='"+i+"'></span><p class='Priority'>"+(dataSet['gsx$priority']['$t'])+"</p></div>");
+                var setPrioImg = (dataSheet[i]['gsx$priority']['$t']).toLowerCase();
+                if(setPrioImg == "normal" || setPrioImg == ""){
+                    $('.prioTxt[data-num='+i+']').addClass('prioNormal');
+                }else if(setPrioImg == "low"){
+                    $('.prioTxt[data-num='+i+']').addClass('prioLow');
+                }else{
+                    $('.prioTxt[data-num='+i+']').addClass('prioHigh');
+                }
+            }
+
+      function feedDataCompleted(liID, taskLink, dataSet){
+          taskLink.append("<a class='Task' href="+liID+" target='_blank'></a><span class='taskTxt'>"+(dataSet['gsx$task']['$t'])+"</span>");
+      }
+
+      function addTimeStamp(currTime, Idofli){
+          Idofli.append("<span class='AssignedAt'>Assigned At:- "+currTime+"</span>");
+      }
+
+      var date = new Date();
+      var hours = date.getHours();
+      var minutes = date.getMinutes();
+      var ampm = hours >= 12 ? 'pm' : 'am';
+      hours = hours % 12;
+      hours = hours ? hours : 12;
+      minutes = minutes < 10 ? '0'+minutes : minutes;
+      var strTime = hours + ':' + minutes + ' ' + ampm;
+      $('#lastUpdate').html($('#lastUpdate').html()+strTime);
+
+      $('#InQ').html($('#InQ').html()+totalInQ);
+      $('#Asgd').html($('#Asgd').html()+totalAsgd);
+      $('#Cmplt').html($('#Cmplt').html()+totalCmplt);
+    });
+    $('#container').css('visibility', 'visible');
+    $('#loader').hide();        
+}
+
+  setTimeout(function(){  
+     window.location.reload(1); 
+  }, 600000);
+}
+catch(error){
+  console.log(error);
+}
+})();
+</script>
